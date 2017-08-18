@@ -49,12 +49,9 @@ func (m *Message) SetTimeToSend(tts int64) *Message {
 	return m
 }
 
+// SetTimeToLive set the TTL in ms
 func (m *Message) SetTimeToLive(ttl int64) *Message {
-	if time.Since(time.Unix(0, ttl*int64(time.Millisecond))) > MaxTimeToLive {
-		m.TimeToLive = time.Now().Add(MaxTimeToLive).UnixNano() / 1e6
-	} else {
-		m.TimeToLive = ttl
-	}
+	m.TimeToLive = ttl
 	return m
 }
 
